@@ -1,0 +1,44 @@
+#내 풀이
+N, M, K = map(int, input().split())
+list1 = list(map(int, input().split()))
+list2 = []
+cnt = 0
+result = 0
+lst = 0
+
+for i in list1:
+    if lst == 0 and i == max(list1):
+        lst = 1
+    else:
+        list2.append(i)
+
+for i in range(M):
+    cnt += 1
+    if cnt==K:
+        result += max(list2)
+        cnt = 0
+    else:
+        result += max(list1)
+print(result)
+
+
+
+#모범답안
+#N, M, K 를 공백으로 구분하여 입력받기
+n, m, k = map(int, input().split())
+#N개의 수를 공백으로 구분하여 입력받기
+data = list(map(int, input().split()))
+
+data.sort()     #입력받은 수 정렬
+first = data[n-1]   #가장 큰 수
+second = data[n-2]  #두 번째로 큰 수
+
+#가장 큰 수가 더해지는 횟수 계산
+count = int(m / (k+1)) * k    #m을 k+1로 나눈 수가 반복 횟수, k는 최댓값을 연속해서 더하는 횟수
+count += m % (k+1)    #m이 k+1로 나누어 떨어지지 않을때
+
+result = 0
+result += (count) * first    #가장 큰 수 더하기
+result += (m-count) * second    #두 번째로 큰 수 더하기
+
+print(result)    #최종 답안 출력
